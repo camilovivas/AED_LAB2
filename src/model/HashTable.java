@@ -1,12 +1,11 @@
 package model;
 
-import java.util.LinkedList;
 
-public class HashTable<T> implements HashFuntion{
-	private LinkedList<Object> table;
+public class HashTable<T> implements HashFuntion<T>{
+	private T[] hash;
 	
 	public HashTable() {
-		table = new LinkedList<>();//preguntar
+		
 	}
 
 	@Override
@@ -30,6 +29,12 @@ public class HashTable<T> implements HashFuntion{
 	@Override
 	public void tableRetrieve(int id) {
 		// TODO busca
+		
+	}
+
+	@Override
+	public void createTable() {
+		// TODO Auto-generated method stub
 		
 	}
 }

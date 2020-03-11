@@ -1,34 +1,32 @@
 package model;
 
 
-public class QueueGeneric implements QueueFuntion<Object> {
+public class QueueGeneric<T> implements QueueFuntion<T> {
 	
-	public ListGeneric<Object> first;
+	private ListGeneric<T> first;
+	private ListGeneric<T> last;
 	
 	public QueueGeneric() {
 		// TODO Auto-generated constructor stub
 	}
 
 	@Override
-	public boolean offer(Object t) {
+	public boolean offer(T t) {
 		// TODO Auto-generated method stub
 		return false;
 	}
 
 	@Override
-	public Object peek() {
+	public T peek() {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
-	public Object poll() {
+	public T poll() {
 		// TODO Auto-generated method stub
 		return null;
 	}
-
-
-
-
-
+	
+	
 }
