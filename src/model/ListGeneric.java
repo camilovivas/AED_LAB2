@@ -2,6 +2,11 @@ package model;
 
 public class ListGeneric<T> {
 	private ListGeneric<T> next;
+	private T node;
+	
+	public ListGeneric(T node) {
+		this.node = node;
+	}
 
 	public ListGeneric<T> getNext() {
 		return next;

@@ -15,15 +15,16 @@ public class QueueGeneric<T> implements QueueFuntion<T> {
 	@Override
 	public boolean offer(T t) {
 		boolean retorno = false;
+		ListGeneric<T> a = new ListGeneric<>(t);
 		if(first == null) {
-			first = (ListGeneric<T>) t;
-			last = (ListGeneric<T>) t;
+			first = a;
+			last = a;
 			size++;
 			retorno = true;
 		}
 		else {
-			last.setNext((ListGeneric<T>) t);
-			last = (ListGeneric<T>) t;
+			last.setNext(a);
+			last = a;
 			retorno = true;
 			size++;
 		}
