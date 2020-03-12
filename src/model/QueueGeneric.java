@@ -33,13 +33,13 @@ public class QueueGeneric<T> implements QueueFuntion<T> {
 
 	@Override
 	public T peek() {
-		return (T) last;
+		return  first.getNode();
 	}
 
 	@Override
 	public T poll() {
-		T retorno = (T) last;
-		last = (ListGeneric<T>) first.deleteLast();
+		T retorno = first.getNode();
+		first = first.getNext();
 		size--;
 		return retorno;
 	}

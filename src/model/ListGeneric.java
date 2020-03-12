@@ -7,6 +7,14 @@ public class ListGeneric<T> {
 	public ListGeneric(T node) {
 		this.node = node;
 	}
+	
+	public T getNode() {
+		return node;
+	}
+
+	public void setNode(T node) {
+		this.node = node;
+	}
 
 	public ListGeneric<T> getNext() {
 		return next;
