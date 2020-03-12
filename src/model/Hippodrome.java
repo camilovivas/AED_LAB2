@@ -2,9 +2,9 @@ package model;
 
 
 public class Hippodrome  {
-	private QueueGeneric<Jockey> qg;//preguntar si se puede asi
+	private QueueFuntion<Jockey> jockeys;
 	public Hippodrome() {
-		qg =  new QueueGeneric<>();
+		jockeys =  new QueueGeneric<>();
 		
 		
 	}
