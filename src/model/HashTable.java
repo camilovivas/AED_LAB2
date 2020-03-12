@@ -5,8 +5,9 @@ public class HashTable<T> implements HashFuntion<T>{
 	private T[] hash;
 	
 	public HashTable() {
-		
+		hash = (T[]) new Object [M];
 	}
+	
 
 	@Override
 	public int hash(int key) {

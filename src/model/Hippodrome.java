@@ -6,8 +6,12 @@ public class Hippodrome  {
 	public Hippodrome() {
 		jockeys =  new QueueGeneric<>();
 		
-		
 	}
+	public QueueFuntion<Jockey> getJockeys() {
+		return jockeys;
+	}
+	
+	
 	
 	
 	
