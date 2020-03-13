@@ -2,44 +2,61 @@ package application;
 
 import java.net.URL;
 import java.util.ResourceBundle;
-
+import model.*;
 import javafx.fxml.Initializable;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
-import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
-import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
 public class Controller implements Initializable {
+	private Hippodrome relation;
 	private Stage stage;
-	private Pane pane;
 	private HBox hb;
 	private VBox example;
-	private Button btAddJockeys;
+	private Button btStart;
 	private Button btAddMore;
 	private TextField t1;
 	private TextField t2;
 	
 	public Controller(Stage s) {
+		relation = new Hippodrome();
 		this.stage = s;
-		stage.setTitle("Indomable spirit");
+		stage.setTitle("Indomable Spirit");
+		btStart = new Button("Start");
+		btAddMore = new Button("add more");
+		actionbtAddMore();
 		start();
 	}
 	
 	public void start() {
 		VBox vb2 = new VBox(4);
-		btAddJockeys = new Button("Start");
+		HBox hb2 = new HBox();		
 		jockeys();
 		changeExample();
 		
-		vb2.getChildren().addAll(example,hb, btAddJockeys);
+		hb2.getChildren().addAll(btStart, btAddMore);
+		vb2.getChildren().addAll(example,hb, hb2);
 		Scene sc = new Scene(vb2);
 		stage.setScene(sc);
 		stage.show();
+	}
+	
+	public void actionbtStart() {
+		
+	}
+	
+	public void actionbtAddMore() {
+		btAddMore.setOnAction(e->{
+			String nameH = t1.getText();
+			String nameJ =t2.getText();
+			relation.addJockey(nameJ, nameH);
+			t1.clear();
+			t2.clear();
+		});
 	}
 	
 	public void changeExample() {
@@ -55,7 +72,6 @@ public class Controller implements Initializable {
 		
 	}
 	
-//	crea los cuadros pa los jinetes
 	public void jockeys() {
 			hb = new HBox();
 			t1 = new TextField();
