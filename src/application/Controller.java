@@ -21,6 +21,8 @@ public class Controller implements Initializable {
 	private Button btAddMore;
 	private TextField t1;
 	private TextField t2;
+	private Text jockey;
+	private Button rematch;
 	
 	public Controller(Stage s) {
 		relation = new Hippodrome();
@@ -46,6 +48,20 @@ public class Controller implements Initializable {
 	}
 	
 	public void actionbtStart() {
+		btStart.setOnAction(e->{
+			StageBettor();
+		});
+	}
+	
+	public  void StageBettor() {
+		Stage s = new Stage();
+		HBox root = new HBox();
+		VBox jockeys = new VBox();
+		
+		root.getChildren().addAll(jockeys);
+		Scene sc = new Scene(root);
+		s.setScene(sc);
+		s.show();
 		
 	}
 	

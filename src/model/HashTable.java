@@ -1,18 +1,20 @@
 package model;
 
+import java.util.ArrayList;
 
-public class HashTable<T> implements HashFuntion<T>{
-	private T[] hash;
+public class HashTable<K, V > implements HashFuntion<K, V>{
+	private ArrayList<Hash<V>> table;
 	
 	public HashTable() {
-		hash = (T[]) new Object [M];
+		createTable();
 	}
 	
 
-	@Override
-	public int hash(int key) {
-		// TODO la funcion hash
-		return 0;
+	@Override//Exploracion lineal
+	public int hash(K key, int i) {
+		int k = key.hashCode(); 
+		int ret = (int) Math.floor(k%M)+i;
+		return ret;
 	}
 
 	@Override
@@ -22,20 +24,36 @@ public class HashTable<T> implements HashFuntion<T>{
 	}
 
 	@Override
-	public void tableInset(Object T) {
-		// TODO agrega
+	public void tableInsert(K key, V value) {
+		Hash<V> h = new Hash<>(value);
+		boolean stop = false;
+		for (int i = 0; i <M && !stop ; i++) {
+			int position = hash(key, i);
+			if(table.get(position)==  null) {
+				table.set(position, h);
+				stop = true;
+			}
+			
+		}
 		
 	}
 
 	@Override
-	public void tableRetrieve(int id) {
-		// TODO busca
+	public V tableRetrieve(K key) {
+		boolean stop = false;
+		for (int i = 0; i <M && !stop ; i++) {
+			int position = hash(key, i);
+			//TODO
+		}
 		
+		return null;
 	}
 
 	@Override
 	public void createTable() {
-		// TODO Auto-generated method stub
-		
+		table = new ArrayList<>();
+		for (int i = 0; i < M; i++) {
+			table.add(null);
+		}		
 	}
 }
