@@ -12,7 +12,7 @@ public class HashTable<K, V > implements HashFuntion<K, V>{
 
 	@Override//Exploracion lineal
 	public int hash(K key, int i) {
-		int k = key.hashCode(); 
+		int k = (int) key; 
 		int ret = (int) Math.floor(k%M)+i;
 		return ret;
 	}
