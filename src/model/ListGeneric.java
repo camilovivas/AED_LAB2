@@ -23,16 +23,5 @@ public class ListGeneric<T> {
 	public void setNext(ListGeneric<T> next) {
 		this.next = next;
 	}
-	
-	public T deleteLast() {
-		T retorno = null;
-		if(next.getNext() == null) {
-			next = null;
-			retorno = (T) this;
-		}
-		else {
-			next.deleteLast();
-		}
-		return retorno;
-	}
+
 }
