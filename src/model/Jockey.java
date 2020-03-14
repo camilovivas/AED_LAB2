@@ -45,6 +45,12 @@ public class Jockey {
 		this.win = win;
 	}
 	
+	@Override
+	public String toString() {
+		String toReturn = "";
+		toReturn += number+"."+nameHorse+" "+nameJockey;
+		return toReturn;
+	}
 	
 	
 	

@@ -7,7 +7,6 @@ public class Hippodrome  {
 	
 	public Hippodrome() {
 		jockeys =  new QueueGeneric<>();
-		number = jockeys.size()+1;
 		
 	}
 	public QueueFuntion<Jockey> getJockeys() {
@@ -15,14 +14,18 @@ public class Hippodrome  {
 	}
 	
 	public void addJockey(String jockey, String horse) {
-		Jockey j = new Jockey(jockey, horse, number);
+		number = jockeys.size();
+		Jockey j = new Jockey(jockey, horse, number+1);
 		jockeys.offer(j);
 	}
 	
-	public String namesJockey() {//como hago para recorrer la queue
+	public String namesJockey() {
 		String names =  "";
-		
-		return null;
+		QueueFuntion<Jockey> temp = jockeys;
+		while(temp.isEmpty() == false) {
+			names += temp.poll().toString()+"\n";
+		}
+		return names;
 	}
 	
 	

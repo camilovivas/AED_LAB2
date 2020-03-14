@@ -48,6 +48,11 @@ public class QueueGeneric<T> implements QueueFuntion<T> {
 	public int size() {
 		return size;
 	}
+
+	@Override
+	public boolean isEmpty() {
+		return (first == null);
+	}
 	
 	
 	
