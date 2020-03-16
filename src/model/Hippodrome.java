@@ -1,7 +1,5 @@
 package model;
 
-import java.util.ArrayList;
-
 public class Hippodrome {
 	private QueueFuntion<Jockey> jockeys;
 	private int number;
@@ -30,22 +28,6 @@ public class Hippodrome {
 		return names;
 	}
 
-//	public ArrayList<Jockey> outcome() {  
-//		ArrayList<Jockey> result = new ArrayList<Jockey>();
-//		QueueFuntion<Jockey> temp = jockeys;
-//		while (temp.isEmpty() == false) {
-//			QueueFuntion<Jockey> temp2 = new QueueGeneric<Jockey>();
-//			int exit = (int) Math.random() * temp.size() + 1;
-//			Jockey aux = temp2.poll();
-//			if (aux.getNumber() == exit) {
-//				result.add(aux);
-//			}else {
-//				
-//			}
-//		}
-//		return result;
-//	}
-
 	public QueueGeneric<Jockey> outcome() {
 		QueueGeneric<Jockey> result = new QueueGeneric<Jockey>();
 		QueueFuntion<Jockey> temp1 = jockeys;
@@ -54,24 +36,28 @@ public class Hippodrome {
 			if (temp1.size() >= temp2.size()) {
 				int exit = (int) Math.random() * temp1.size() + 1;
 				boolean found = false;
-				while (found == false) {
+				int i = 0;
+				while (found == false && temp1.isEmpty() == false) {
 					Jockey view = temp1.poll();
-					if (view.getNumber() == exit) {
+					if (i == exit) {
 						result.offer(view);
 						found = true;
 					} else {
+						i++;
 						temp2.offer(view);
 					}
 				}
 			} else {
 				int exit = (int) Math.random() * temp2.size() + 1;
 				boolean found = false;
-				while (found == false) {
+				int i = 0;
+				while (found == false && temp2.isEmpty() == false) {
 					Jockey view = temp2.poll();
-					if (view.getNumber() == exit) {
+					if (i == exit) {
 						result.offer(view);
 						found = true;
 					} else {
+						i++;
 						temp1.offer(view);
 					}
 				}
