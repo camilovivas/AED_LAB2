@@ -32,19 +32,20 @@ public class Hippodrome {
 		QueueGeneric<Jockey> result = new QueueGeneric<Jockey>();
 		QueueFuntion<Jockey> temp1 = jockeys;
 		QueueGeneric<Jockey> temp2 = new QueueGeneric<Jockey>();
-		while (temp2.isEmpty() == false && temp1.isEmpty() == false) {
+		boolean firstTime = true;
+		while (firstTime || temp2.isEmpty() == false || temp1.isEmpty() == false ) {
+			firstTime = false;
 			if (temp1.size() >= temp2.size()) {
 				int exit = (int) Math.random() * temp1.size() + 1;
 				boolean found = false;
 				int i = 0;
 				while (found == false && temp1.isEmpty() == false) {
-					Jockey view = temp1.poll();
 					if (i == exit) {
-						result.offer(view);
+						result.offer(temp1.poll());
 						found = true;
 					} else {
 						i++;
-						temp2.offer(view);
+						temp2.offer(temp1.poll());
 					}
 				}
 			} else {
@@ -54,16 +55,24 @@ public class Hippodrome {
 				while (found == false && temp2.isEmpty() == false) {
 					Jockey view = temp2.poll();
 					if (i == exit) {
-						result.offer(view);
+						result.offer(temp2.poll());
 						found = true;
 					} else {
 						i++;
-						temp1.offer(view);
+						if(temp2.peek() != null)
+						temp1.offer(temp2.poll());
 					}
 				}
 			}
 
 		}
 		return result;
+	}
+	
+	public QueueGeneric<Jockey> test(){
+		Jockey j = new Jockey("Jaime", "Pegaso", 1);
+		QueueGeneric<Jockey> lj = new QueueGeneric<Jockey>();
+		lj.offer(j);
+		return lj;
 	}
 }

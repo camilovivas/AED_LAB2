@@ -15,5 +15,13 @@ class HippodromeTest {
 		assertEquals("1.pony camilo"+"\n"+"2.pony2 camilo2"+"\n", actual);
 	}
 	
+	@Test
+	void outcomeTest() {
+		Hippodrome a = new Hippodrome();
+		a.addJockey("camilo", "pony");
+		a.addJockey("camilo2", "pony2");
+		a.outcome();
+	}
+	
 	
 }
