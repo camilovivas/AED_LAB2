@@ -21,7 +21,7 @@ class HippodromeTest {
 		Hippodrome a = new Hippodrome();
 		a.addJockey("camilo", "pony");
 		a.addJockey("camilo2", "pony2");
-		a.outcome();
+		assertEquals(a.outcome().size(), 2);
 	}
 	
 	@Test
