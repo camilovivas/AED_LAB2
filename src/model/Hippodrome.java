@@ -31,47 +31,6 @@ public class Hippodrome {
 		return names;
 	}
 
-//	public QueueGeneric<Jockey> outcome() {
-//		QueueGeneric<Jockey> result = new QueueGeneric<Jockey>();
-//		QueueFuntion<Jockey> temp1 = jockeys;
-//		QueueGeneric<Jockey> temp2 = new QueueGeneric<Jockey>();
-//		boolean firstTime = true;
-//		while (firstTime || temp2.isEmpty() == false || temp1.isEmpty() == false ) {
-//			firstTime = false;
-//			if (temp1.size() >= temp2.size()) {
-//				int exit = (int) Math.random() * temp1.size() + 1;
-//				boolean found = false;
-//				int i = 0;
-//				while (found == false && temp1.isEmpty() == false) {
-//					if (i == exit) {
-//						result.offer(temp1.poll());
-//						found = true;
-//					} else {
-//						i++;
-//						temp2.offer(temp1.poll());
-//					}
-//				}
-//			} else {
-//				int exit = (int) Math.random() * temp2.size() + 1;
-//				boolean found = false;
-//				int i = 0;
-//				while (found == false && temp2.isEmpty() == false) {
-//					Jockey view = temp2.poll();
-//					if (i == exit) {
-//						result.offer(temp2.poll());
-//						found = true;
-//					} else {
-//						i++;
-//						if(temp2.peek() != null)
-//						temp1.offer(temp2.poll());
-//					}
-//				}
-//			}
-//
-//		}
-//		return result;
-//	}
-
 	public QueueGeneric<Jockey> outcome() {
 		QueueGeneric<Jockey> qj = new QueueGeneric<Jockey>();
 		ArrayList<Jockey> lj = new ArrayList<Jockey>();
