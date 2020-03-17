@@ -39,7 +39,7 @@ public class Hippodrome {
 				int exit = (int) Math.random() * temp1.size() + 1;
 				boolean found = false;
 				int i = 0;
-				while (found == false && temp1.isEmpty() == false) {
+				while (!found && temp1.isEmpty() == false) {
 					if (i == exit) {
 						result.offer(temp1.poll());
 						found = true;
@@ -67,6 +67,51 @@ public class Hippodrome {
 
 		}
 		return result;
+	}
+	
+	
+	public  QueueGeneric<Jockey> outcome2() {
+		QueueGeneric<Jockey> temp2 = new QueueGeneric<>();
+		int[] numbers = createNumbers();
+		for (int i = 0; i < numbers.length; i++) {
+			Jockey a = search(numbers[i]); 
+			temp2.offer(a);	
+		}		
+		return temp2;
+	}
+	
+	public int[] createNumbers() {
+		int [] numbers = new int[jockeys.size()];
+		for (int i = 0; i < numbers.length; i++) {
+			int num =(int) (Math.random()*jockeys.size()+1);
+			for (int j = i; j >=0; j--) {
+				if(numbers[j] == num) {
+					num =  (int) (Math.random()*jockeys.size()+1);
+					j = i;
+				}
+			}
+			numbers[i] = num;
+		}
+		return numbers;
+	}
+	
+	public Jockey search(int index) {
+		QueueFuntion<Jockey> temp1 = jockeys;
+		Jockey toReturn = null;
+		boolean stop = false;
+		while(!stop) {
+			if(!temp1.isEmpty()) {
+				Jockey a = temp1.poll();
+				if(a.getNumber() == index) {  
+					toReturn = a;
+					stop = true;
+				}				
+			}
+			else {
+				stop = true;
+			}
+		}
+		return toReturn;
 	}
 	
 	public QueueGeneric<Jockey> test(){

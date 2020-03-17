@@ -38,7 +38,7 @@ public class Controller implements Initializable {
 		VBox vb2 = new VBox(4);
 		HBox hb2 = new HBox();		
 		jockeys();
-		changeExample();
+		chargeExample();
 		
 		hb2.getChildren().addAll(btStart, btAddMore);
 		vb2.getChildren().addAll(example,hb, hb2);
@@ -76,7 +76,7 @@ public class Controller implements Initializable {
 		});
 	}
 	
-	public void changeExample() {
+	public void chargeExample() {
 		example = new VBox();
 		HBox hb = new HBox();
 		Text tc = new Text("llene las casillas  asi:");
