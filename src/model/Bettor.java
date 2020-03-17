@@ -4,11 +4,21 @@ public class Bettor {
 	private String id;
 	private String name;
 	private int money;
+	private Jockey jockeyBettor;
 	
-	public Bettor() {
-		
+	public Bettor(String id, String name, int money) {
+		this.id = id;
+		this.name = name;
+		this.money = money;
 	}
 	
+	
+	public Jockey getJockeyBettor() {
+		return jockeyBettor;
+	}	
+	public void setJockeyBettor(Jockey jockeyBettor) {
+		this.jockeyBettor = jockeyBettor;
+	}
 	public String getId() {
 		return id;
 	}

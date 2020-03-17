@@ -1,14 +1,15 @@
 package model;
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 
 public class Hippodrome {
 	private QueueFuntion<Jockey> jockeys;
+	private HashFuntion<Integer, Bettor> bettors;
 	private int number;
 
 	public Hippodrome() {
 		jockeys = new QueueGeneric<>();
+		bettors = new HashTable<>();
 
 	}
 
@@ -16,10 +17,23 @@ public class Hippodrome {
 		return jockeys;
 	}
 
+	public HashFuntion<Integer, Bettor> getBettors() {
+		return bettors;
+	}
+
 	public void addJockey(String jockey, String horse) {
 		number = jockeys.size();
 		Jockey j = new Jockey(jockey, horse, number + 1);
 		jockeys.offer(j);
+	}
+	
+	public void addBettor(String id, String name, int money, String horse) {
+		Bettor b = new Bettor(id, name, money);
+		Jockey a = search(horse);
+		b.setJockeyBettor(a);
+		int cast = Integer.parseInt(id);
+		bettors.tableInsert(cast, b);
+		
 	}
 
 	public String namesJockey() {
@@ -52,15 +66,6 @@ public class Hippodrome {
 			}
 			for (int i = 0; i < numbersExit.size() ; i++) {
 				boolean found = false;
-				int i = 0;
-				while (!found && temp1.isEmpty() == false) {
-					if (i == exit) {
-						result.offer(temp1.poll());
-						found = true;
-					} else {
-						i++;
-						temp2.offer(temp1.poll());
-					}
 				if(numbersExit.get(i) == exit) {
 					found = true;
 				}
@@ -73,55 +78,49 @@ public class Hippodrome {
 	}
 	
 	
-	public  QueueGeneric<Jockey> outcome2() {
-		QueueGeneric<Jockey> temp2 = new QueueGeneric<>();
-		int[] numbers = createNumbers();
-		for (int i = 0; i < numbers.length; i++) {
-			Jockey a = search(numbers[i]); 
-			temp2.offer(a);	
-		}		
-		return temp2;
-	}
-	
-	public int[] createNumbers() {
-		int [] numbers = new int[jockeys.size()];
-		for (int i = 0; i < numbers.length; i++) {
-			int num =(int) (Math.random()*jockeys.size()+1);
-			for (int j = i; j >=0; j--) {
-				if(numbers[j] == num) {
-					num =  (int) (Math.random()*jockeys.size()+1);
-					j = i;
-				}
-			}
-			numbers[i] = num;
-		}
-		return numbers;
-	}
-	
-	public Jockey search(int index) {
+//	//OTRO METODO PARA ELEGIR GANADOR 
+//	public  QueueGeneric<Jockey> outcome2() {
+//		QueueGeneric<Jockey> temp2 = new QueueGeneric<>();
+//		int[] numbers = createNumbers();
+//		for (int i = 0; i < numbers.length; i++) {
+//			Jockey a = search(numbers[i]); 
+//			temp2.offer(a);	
+//		}		
+//		return temp2;
+//	}
+//	
+//	public int[] createNumbers() {
+//		int [] numbers = new int[jockeys.size()];
+//		for (int i = 0; i < numbers.length; i++) {
+//			int num =(int) (Math.random()*jockeys.size()+1);
+//			for (int j = i; j >=0; j--) {
+//				if(numbers[j] == num) {
+//					num =  (int) (Math.random()*jockeys.size()+1);
+//					j = i;
+//				}
+//			}
+//			numbers[i] = num;
+//		}
+//		return numbers;
+//	}
+//	
+	public Jockey search(String horse) {
 		QueueFuntion<Jockey> temp1 = jockeys;
 		Jockey toReturn = null;
 		boolean stop = false;
 		while(!stop) {
 			if(!temp1.isEmpty()) {
 				Jockey a = temp1.poll();
-				if(a.getNumber() == index) {  
+				if(a.getNameHorse().compareToIgnoreCase(horse) == 0) {  
 					toReturn = a;
 					stop = true;
-				}				
+				}
 			}
 			else {
 				stop = true;
 			}
 		}
 		return toReturn;
-	}
-	
-	public QueueGeneric<Jockey> test(){
-		Jockey j = new Jockey("Jaime", "Pegaso", 1);
-		QueueGeneric<Jockey> lj = new QueueGeneric<Jockey>();
-		lj.offer(j);
-		return lj;
 	}
 
 }

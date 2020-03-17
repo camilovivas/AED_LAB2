@@ -1,10 +1,12 @@
 package model;
 
-public class Hash<V> {
+public class Hash<K, V> {
 	private V node;
+	private K key;
 	
-	public Hash(V node) {
+	public Hash(K key, V node) {
 		this.node = node;
+		this.key = key;
 	}
 
 	public V getNode() {
@@ -13,6 +15,14 @@ public class Hash<V> {
 
 	public void setNode(V node) {
 		this.node = node;
+	}
+
+	public K getKey() {
+		return key;
+	}
+
+	public void setKey(K key) {
+		this.key = key;
 	}
 	
 	

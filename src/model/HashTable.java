@@ -3,7 +3,7 @@ package model;
 import java.util.ArrayList;
 
 public class HashTable<K, V > implements HashFuntion<K, V>{
-	private ArrayList<Hash<V>> table;
+	private ArrayList<Hash<K, V>> table;
 	
 	public HashTable() {
 		createTable();
@@ -25,7 +25,7 @@ public class HashTable<K, V > implements HashFuntion<K, V>{
 
 	@Override
 	public void tableInsert(K key, V value) {
-		Hash<V> h = new Hash<>(value);
+		Hash<K, V> h = new Hash<>(key,value);
 		boolean stop = false;
 		for (int i = 0; i <M && !stop ; i++) {
 			int position = hash(key, i);
@@ -41,15 +41,17 @@ public class HashTable<K, V > implements HashFuntion<K, V>{
 	@Override
 	public V tableRetrieve(K key) {
 		boolean stop = false;
+		Hash<K,V> toReturn = null;
 		for (int i = 0; i <M && !stop ; i++) {
 			int position = hash(key, i);
-			//TODO
+			toReturn = table.get(position);
+			if(toReturn.getKey().equals(key)) {
+				stop = true;
+			}
 		}
-		
-		return null;
+		return toReturn.getNode();
 	}
 
-	@Override
 	public void createTable() {
 		table = new ArrayList<>();
 		for (int i = 0; i < M; i++) {

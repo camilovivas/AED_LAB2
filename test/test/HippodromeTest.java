@@ -2,8 +2,7 @@ package test;
 
 import static org.junit.jupiter.api.Assertions.*;
 import org.junit.jupiter.api.Test;
-import model.Hippodrome;
-import model.Jockey;
+import model.*;
 
 class HippodromeTest {
 	
@@ -25,23 +24,21 @@ class HippodromeTest {
 	}
 	
 	@Test
+	void addBettorTest() {
+		Hippodrome a = new Hippodrome();
+		a.addJockey("felipe", "pony");
+		a.addBettor("1006015105", "jaime", 1000, "pony");
+		Bettor actual = a.getBettors().tableRetrieve(1006015105);
+		assertEquals("pony", actual.getJockeyBettor().getNameHorse());
+	}
+	
+	@Test
 	void search() {
 		Hippodrome a = new Hippodrome();
 		a.addJockey("camilo", "pony");
 		a.addJockey("camilo2", "pony2");
-		Jockey actual = a.search(2);
+		Jockey actual = a.search("pony2");
 		assertEquals("camilo2", actual.getNameJockey());
 	}
 	
-	@Test
-	void outcomeTest2() {
-		Hippodrome a = new Hippodrome();
-		a.addJockey("camilo", "pony");
-		a.addJockey("jaime", "pony2");
-		a.addJockey("felipe", "littlePony");
-		a.addJockey("aristi", "pony3");		
-		a.addJockey("jeison", "pony4");		
-		a.outcome2();
-		
-	}
 }
