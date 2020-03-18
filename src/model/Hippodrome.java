@@ -35,6 +35,14 @@ public class Hippodrome {
 		bettors.tableInsert(cast, b);
 		
 	}
+	
+	public String checkBettor(String id) {
+		int cast = Integer.parseInt(id);
+		String toReturn = "";
+		Bettor temp = bettors.tableRetrieve(cast);
+		toReturn += temp.toString();
+		return toReturn;
+	}
 
 	public String namesJockey() {
 		String names = "";

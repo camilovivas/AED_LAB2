@@ -17,11 +17,18 @@ public class Controller implements Initializable {
 	private Stage stage;
 	private HBox hb;
 	private VBox example;
+	private VBox example2;
 	private Button btStart;
 	private Button btAddMore;
 	private TextField t1;
 	private TextField t2;
+	private TextField B1;
+	private TextField B2;
+	private TextField B3;
+	private TextField B4;
 	private Button rematch;
+	private Button addB;
+	private Button readyB;
 	
 	public Controller(Stage s) {
 		relation = new Hippodrome();
@@ -55,15 +62,45 @@ public class Controller implements Initializable {
 	
 	public  void StageBettor() {
 		stage.close();
+		exampleB();
 		Stage s = new Stage();
 		HBox root = new HBox();
 		Text jockey = new Text(relation.namesJockey());
 		
-		root.getChildren().addAll(jockey);
+		VBox bettor = new VBox();
+		HBox textB = new HBox();
+		B1 = new TextField();
+		B2 = new TextField();
+		B3 = new TextField();
+		B4 = new TextField();
+		
+		HBox butt = new HBox();
+		addB = new Button("Add More");
+		readyB = new Button("jugar");
+		butt.getChildren().addAll(addB, readyB);
+		textB.getChildren().addAll(B1,B2,B3,B4);
+		bettor.getChildren().addAll(example2,textB, butt);
+		root.getChildren().addAll(jockey,bettor);
 		Scene sc = new Scene(root);
 		s.setScene(sc);
 		s.show();
 		
+	}
+	
+	public void exampleB() {
+		example2 = new VBox();
+		Text tc = new Text("llene las casillas  asi:");
+		HBox c = new HBox();
+		TextField t1 = new TextField("cedula");
+		t1.setDisable(true);
+		TextField t2 = new TextField("nombre");
+		t2.setDisable(true);
+		TextField t3 = new TextField("monto apostado");
+		t3.setDisable(true);
+		TextField t4 = new TextField("caballo a apostar");
+		t4.setDisable(true);
+		c.getChildren().addAll(t1,t2,t3,t4);
+		example2.getChildren().addAll(tc,c);
 	}
 	
 	public void actionbtAddMore() {

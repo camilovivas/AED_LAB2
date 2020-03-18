@@ -38,5 +38,18 @@ public class Bettor {
 		this.money = money;
 	}
 	
+	@Override
+	public String toString() {
+		String toReturn = "";
+		toReturn += name +"\n"+ id + "\n";
+		if(jockeyBettor.isWin()) {
+			toReturn += jockeyBettor.getNameHorse()+" ha ganado";
+		}
+		else {
+			toReturn += jockeyBettor.getNameHorse()+" ha perdido";
+		}
+		return toReturn;
+	}
+	
 	
 }
