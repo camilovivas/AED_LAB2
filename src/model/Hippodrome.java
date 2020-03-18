@@ -52,7 +52,9 @@ public class Hippodrome {
 		ArrayList<Integer> numbersExit = new ArrayList<Integer>();
 		boolean firstTime = true;
 		while (temp.isEmpty() == false) {
-			lj.add(temp.poll());
+			Jockey win = temp.poll();
+			win.setWin(true);
+			lj.add(win);
 		}
 		while (qj.size() != lj.size()) {
 			int exit = 	(int) Math.round(Math.random() * lj.size());
