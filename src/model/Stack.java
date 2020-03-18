@@ -19,19 +19,12 @@ public class Stack<T> implements IStack<T> {
 		return toReturn;
 	}
 	@Override
-	public T push(T item) {
+	public void push(T item) {
 		ListGeneric<T> n = new ListGeneric<>(item);
 		n.setNext(top);
 		top = n;
 		size++;
-		return null;
 	}
-	@Override
-	public int search(Object o) {
-		// TODO Auto-generated method stub
-		return 0;
-	}
-
 	@Override
 	public boolean isEmpty() {
 		return (top == null);
