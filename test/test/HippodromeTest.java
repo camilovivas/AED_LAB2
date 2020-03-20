@@ -41,4 +41,14 @@ class HippodromeTest {
 		assertEquals("camilo2", actual.getNameJockey());
 	}
 	
+	@Test
+	void podio() {
+		Hippodrome a = new Hippodrome();
+		a.addJockey("camilo", "pony");
+		a.addJockey("camilo2", "pony2");
+		a.addJockey("camilo3", "pony3");
+		String actual = a.podio();
+		assertEquals("ganador pony segundo pony2 tercero pony3", actual);
+	}
+	
 }

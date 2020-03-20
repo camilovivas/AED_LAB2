@@ -87,6 +87,15 @@ public class Hippodrome {
 		return qj;
 	}
 	
+	public String podio() {
+		QueueFuntion<Jockey> temp = new QueueGeneric<>();
+		temp = jockeys;
+		String ganador = "ganador "+temp.poll().getNameHorse()+" ";
+		String segundo = "segundo "+temp.poll().getNameHorse()+" ";
+		String tercero = "tercero "+temp.poll().getNameHorse();
+		String toReturn = ganador+segundo+tercero;
+		return toReturn;				
+	}
 	
 //	//OTRO METODO PARA ELEGIR GANADOR 
 //	public  QueueGeneric<Jockey> outcome2() {
