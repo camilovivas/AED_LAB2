@@ -15,6 +15,8 @@ import javafx.stage.Stage;
 public class Controller implements Initializable {
 	private Hippodrome relation;
 	private Stage stage;
+	private Stage s;
+	private Stage sa;
 	private HBox hb;
 	private VBox example;
 	private VBox example2;
@@ -26,9 +28,13 @@ public class Controller implements Initializable {
 	private TextField B2;
 	private TextField B3;
 	private TextField B4;
+	private TextField tconsult;
+	private Text result;
 	private Button rematch;
 	private Button addB;
 	private Button readyB;
+	private Button consult;
+	private Button tryAgain;
 	
 	public Controller(Stage s) {
 		relation = new Hippodrome();
@@ -39,9 +45,16 @@ public class Controller implements Initializable {
 		btAddMore = new Button("add");
 		addB = new Button("Add");
 		readyB = new Button("play");
+		consult = new Button("consultar");
+		tryAgain = new Button("Jugar de nuevo");
+		rematch = new Button("Revancha");
 		actionbtAddMore();
 		actionbtStart();
 		actionAddBettor();
+		actionPlay();
+		actionConsult();
+		actionRematch();
+		actionTryAgain();
 		start();
 	}
 	
@@ -50,7 +63,6 @@ public class Controller implements Initializable {
 		HBox hb2 = new HBox();		
 		jockeys();
 		chargeExample();
-		
 		hb2.getChildren().addAll(btStart, btAddMore);
 		vb2.getChildren().addAll(example,hb, hb2);
 		Scene sc = new Scene(vb2);
@@ -67,17 +79,15 @@ public class Controller implements Initializable {
 	public  void StageBettor() {
 		stage.close();
 		exampleB();
-		Stage s = new Stage();
+		s = new Stage();
 		HBox root = new HBox();
 		Text jockey = new Text(relation.namesJockey());
-		
 		VBox bettor = new VBox();
 		HBox textB = new HBox();
 		B1 = new TextField();
 		B2 = new TextField();
 		B3 = new TextField();
 		B4 = new TextField();
-		
 		HBox butt = new HBox();
 		butt.getChildren().addAll(addB, readyB);
 		textB.getChildren().addAll(B1,B2,B3,B4);
@@ -86,11 +96,52 @@ public class Controller implements Initializable {
 		Scene sc = new Scene(root);
 		s.setScene(sc);
 		s.show();
-		
 	}
 	
 	public void actionPlay() {
-		
+		readyB.setOnAction(e->{
+			play();
+		});
+	}
+	
+	public void play() {
+		s.close();
+		sa = new Stage();
+		HBox root = new HBox();
+		Text jockey = new Text("podio");//relation.podio()	
+		VBox b =   new VBox();
+		Text  t= new Text("Escriba su numero de identificacion para ver si gano"); 
+		tconsult = new TextField();
+		result = new Text();
+		HBox h = new HBox();
+		h.getChildren().addAll(rematch, tryAgain);
+		b.getChildren().addAll(t,tconsult,result, consult,h);
+		root.getChildren().addAll(jockey, b);
+		Scene sc = new Scene(root);
+		sa.setScene(sc);
+		sa.show();
+	}
+	
+	public void actionConsult() {
+		consult.setOnAction(e->{
+			String id = tconsult.getText();
+			String tresult = relation.checkBettor(id);
+			result.setText(tresult);
+			tconsult.clear();
+		});
+	}
+	
+	public void actionRematch() {
+		rematch.setOnAction(e->{
+			sa.close();
+			StageBettor();
+		});
+	}
+	
+	public void actionTryAgain() {
+		tryAgain.setOnAction(e->{
+			
+		});
 	}
 	
 	public void actionAddBettor() {
@@ -160,8 +211,5 @@ public class Controller implements Initializable {
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
 		// TODO Auto-generated method stub
-		
-	}
-	
-	
+	}	
 }

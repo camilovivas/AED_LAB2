@@ -98,11 +98,12 @@ public class Hippodrome {
 	}
 	
 	public String podio() {
+		outcome();
 		QueueFuntion<Jockey> temp = new QueueGeneric<>();
 		Jockey a = jockeys.poll();
 		Jockey b = jockeys.poll();
 		Jockey c = jockeys.poll();
-		String ganador = "ganador "+a.getNameHorse()+" ";	
+		String ganador ="PODIO:"+"\n"+"ganador "+a.getNameHorse()+" ";	
 		String segundo = "segundo "+b.getNameHorse()+" ";
 		String tercero = "tercero "+c.getNameHorse();
 		String toReturn = ganador+segundo+tercero;
