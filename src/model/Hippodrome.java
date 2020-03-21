@@ -4,13 +4,14 @@ import java.util.ArrayList;
 
 public class Hippodrome {
 	private QueueFuntion<Jockey> jockeys;
+	private IStack<Jockey> jockeysRematch;
 	private HashFuntion<Integer, Bettor> bettors;
 	private int number;
 
 	public Hippodrome() {
 		jockeys = new QueueGeneric<>();
 		bettors = new HashTable<>();
-
+		jockeysRematch = new Stack<>();
 	}
 
 	public QueueFuntion<Jockey> getJockeys() {
@@ -26,6 +27,12 @@ public class Hippodrome {
 		Jockey j = new Jockey(jockey, horse, number + 1);
 		jockeys.offer(j);
 	}
+	
+	public void invertQueue() {
+		//TODO
+		//@TEACHER
+	}
+	
 	
 	public void addBettor(String id, String name, int money, String horse) {
 		Bettor b = new Bettor(id, name, money);
@@ -46,10 +53,13 @@ public class Hippodrome {
 
 	public String namesJockey() {
 		String names = "";
-		QueueFuntion<Jockey> temp = jockeys;
-		while (temp.isEmpty() == false) {
-			names += temp.poll().toString() + "\n";
+		QueueFuntion<Jockey> temp = new QueueGeneric<>();
+		while (jockeys.isEmpty() == false) {
+			Jockey tempj = jockeys.poll();
+			names += tempj.toString() + "\n";
+			temp.offer(tempj);
 		}
+		jockeys = temp;
 		return names;
 	}
 
@@ -89,11 +99,20 @@ public class Hippodrome {
 	
 	public String podio() {
 		QueueFuntion<Jockey> temp = new QueueGeneric<>();
-		temp = jockeys;
-		String ganador = "ganador "+temp.poll().getNameHorse()+" ";
-		String segundo = "segundo "+temp.poll().getNameHorse()+" ";
-		String tercero = "tercero "+temp.poll().getNameHorse();
+		Jockey a = jockeys.poll();
+		Jockey b = jockeys.poll();
+		Jockey c = jockeys.poll();
+		String ganador = "ganador "+a.getNameHorse()+" ";	
+		String segundo = "segundo "+b.getNameHorse()+" ";
+		String tercero = "tercero "+c.getNameHorse();
 		String toReturn = ganador+segundo+tercero;
+		temp.offer(a);
+		temp.offer(b);
+		temp.offer(c);
+		while(jockeys.isEmpty() == false) {
+			temp.offer(jockeys.poll());
+		}
+		jockeys =  temp;
 		return toReturn;				
 	}
 	
