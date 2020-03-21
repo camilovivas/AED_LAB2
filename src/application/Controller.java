@@ -35,9 +35,13 @@ public class Controller implements Initializable {
 		this.stage = s;
 		stage.setTitle("Indomable Spirit");
 		btStart = new Button("Start");
-		btAddMore = new Button("add more");
+		btStart.setDisable(true);
+		btAddMore = new Button("add");
+		addB = new Button("Add");
+		readyB = new Button("play");
 		actionbtAddMore();
 		actionbtStart();
+		actionAddBettor();
 		start();
 	}
 	
@@ -75,8 +79,6 @@ public class Controller implements Initializable {
 		B4 = new TextField();
 		
 		HBox butt = new HBox();
-		addB = new Button("Add More");
-		readyB = new Button("jugar");
 		butt.getChildren().addAll(addB, readyB);
 		textB.getChildren().addAll(B1,B2,B3,B4);
 		bettor.getChildren().addAll(example2,textB, butt);
@@ -85,6 +87,24 @@ public class Controller implements Initializable {
 		s.setScene(sc);
 		s.show();
 		
+	}
+	
+	public void actionPlay() {
+		
+	}
+	
+	public void actionAddBettor() {
+		addB.setOnAction(e->{
+			String cc = B1.getText();
+			String name = B2.getText();
+			int money = Integer.parseInt(B3.getText());
+			String horse = B4.getText();
+			relation.addBettor(cc, name, money, horse);
+			B1.clear();
+			B2.clear();
+			B3.clear();
+			B4.clear();
+		});
 	}
 	
 	public void exampleB() {
@@ -110,6 +130,9 @@ public class Controller implements Initializable {
 			relation.addJockey(nameJ, nameH);
 			t1.clear();
 			t2.clear();
+			if(relation.getJockeys().size() > 6) {
+				btStart.setDisable(false);
+			}
 		});
 	}
 	
