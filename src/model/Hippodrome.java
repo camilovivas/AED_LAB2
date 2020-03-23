@@ -116,36 +116,62 @@ public class Hippodrome {
 		return toReturn;				
 	}
 	public String play() {
-		jockeys = outcome();
-		System.out.println(namesJockey());
+		jockeys = outcome2();
 		return podio();
 	}
 //	//OTRO METODO PARA ELEGIR GANADOR 
-//	public  QueueGeneric<Jockey> outcome2() {
-//		QueueGeneric<Jockey> temp2 = new QueueGeneric<>();
-//		int[] numbers = createNumbers();
-//		for (int i = 0; i < numbers.length; i++) {
-//			Jockey a = search(numbers[i]); 
-//			temp2.offer(a);	
-//		}		
-//		return temp2;
-//	}
-//	
-//	public int[] createNumbers() {
-//		int [] numbers = new int[jockeys.size()];
-//		for (int i = 0; i < numbers.length; i++) {
-//			int num =(int) (Math.random()*jockeys.size()+1);
-//			for (int j = i; j >=0; j--) {
-//				if(numbers[j] == num) {
-//					num =  (int) (Math.random()*jockeys.size()+1);
-//					j = i;
-//				}
-//			}
-//			numbers[i] = num;
-//		}
-//		return numbers;
-//	}
-//	
+	public  QueueFuntion<Jockey> outcome2() {
+		QueueFuntion<Jockey> temp2 = new QueueGeneric<>();
+		int[] numbers = createNumbers();
+		for (int i = 0; i < numbers.length; i++) {
+			Jockey a = search2(numbers[i]); 
+			if(i == 0) {
+				a.setWin(true);
+			}
+			temp2.offer(a);	
+		}		
+		return temp2;
+	}
+	
+	public int[] createNumbers() {
+		int [] numbers = new int[jockeys.size()];
+		for (int i = 0; i < numbers.length; i++) {
+			int num =(int) (Math.random()*jockeys.size()+1);
+			for (int j = i; j >=0; j--) {
+				if(numbers[j] == num) {
+					num =  (int) (Math.random()*jockeys.size()+1);
+					j = i;
+				}
+			}
+			numbers[i] = num;
+		}
+		return numbers;
+	}
+	
+	public Jockey search2(int num) {
+		QueueFuntion<Jockey> temp1 = new QueueGeneric<>();
+		Jockey toReturn = null;
+		boolean stop = false;
+		while(!stop) {
+			if(!jockeys.isEmpty()) {
+				Jockey a = jockeys.poll();
+				temp1.offer(a);
+				if(a.getNumber() == num) {  
+					toReturn = a;
+					stop = true;
+				}
+			}
+			else {
+				stop = true;
+			}
+		}
+		while(!jockeys.isEmpty()) {
+			temp1.offer(jockeys.poll());
+		}
+		jockeys = temp1;
+		return toReturn;
+	}
+	//FIN
 	public Jockey search(String horse) {
 		QueueFuntion<Jockey> temp1 = new QueueGeneric<>();
 		Jockey toReturn = null;
