@@ -20,7 +20,12 @@ class HippodromeTest {
 		Hippodrome a = new Hippodrome();
 		a.addJockey("camilo", "pony");
 		a.addJockey("camilo2", "pony2");
-		assertEquals(a.outcome().size(), 2);
+		a.addJockey("camilo3", "pony3");
+		a.addJockey("camilo4", "pony4");
+		a.addJockey("camilo5", "pony5");
+		a.addJockey("camilo6", "pony6");
+		a.addJockey("camilo7", "pony7");
+		assertEquals(a.outcome().size(), 7);
 	}
 	
 	@Test
@@ -48,7 +53,7 @@ class HippodromeTest {
 		a.addJockey("camilo2", "pony2");
 		a.addJockey("camilo3", "pony3");
 		String actual = a.podio();
-		assertEquals("ganador pony segundo pony2 tercero pony3", actual);
+		assertEquals("PODIO:"+"\n"+"ganador pony"+"\n"+ "segundo pony2"+"\n"+ "tercero pony3", actual);
 	}
 	
 }

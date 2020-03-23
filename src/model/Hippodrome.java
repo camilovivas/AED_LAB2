@@ -98,13 +98,12 @@ public class Hippodrome {
 	}
 	
 	public String podio() {
-		outcome();
 		QueueFuntion<Jockey> temp = new QueueGeneric<>();
 		Jockey a = jockeys.poll();
 		Jockey b = jockeys.poll();
 		Jockey c = jockeys.poll();
-		String ganador ="PODIO:"+"\n"+"ganador "+a.getNameHorse()+" ";	
-		String segundo = "segundo "+b.getNameHorse()+" ";
+		String ganador ="PODIO:"+"\n"+"ganador "+a.getNameHorse()+"\n";	
+		String segundo = "segundo "+b.getNameHorse()+"\n";
 		String tercero = "tercero "+c.getNameHorse();
 		String toReturn = ganador+segundo+tercero;
 		temp.offer(a);
@@ -116,7 +115,11 @@ public class Hippodrome {
 		jockeys =  temp;
 		return toReturn;				
 	}
-	
+	public String play() {
+		jockeys = outcome();
+		System.out.println(namesJockey());
+		return podio();
+	}
 //	//OTRO METODO PARA ELEGIR GANADOR 
 //	public  QueueGeneric<Jockey> outcome2() {
 //		QueueGeneric<Jockey> temp2 = new QueueGeneric<>();
@@ -144,12 +147,13 @@ public class Hippodrome {
 //	}
 //	
 	public Jockey search(String horse) {
-		QueueFuntion<Jockey> temp1 = jockeys;
+		QueueFuntion<Jockey> temp1 = new QueueGeneric<>();
 		Jockey toReturn = null;
 		boolean stop = false;
 		while(!stop) {
-			if(!temp1.isEmpty()) {
-				Jockey a = temp1.poll();
+			if(!jockeys.isEmpty()) {
+				Jockey a = jockeys.poll();
+				temp1.offer(a);
 				if(a.getNameHorse().compareToIgnoreCase(horse) == 0) {  
 					toReturn = a;
 					stop = true;
@@ -159,6 +163,10 @@ public class Hippodrome {
 				stop = true;
 			}
 		}
+		while(!jockeys.isEmpty()) {
+			temp1.offer(jockeys.poll());
+		}
+		jockeys = temp1;
 		return toReturn;
 	}
 

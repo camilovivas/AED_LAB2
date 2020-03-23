@@ -81,6 +81,7 @@ public class Controller implements Initializable {
 		exampleB();
 		s = new Stage();
 		HBox root = new HBox();
+		System.out.println(relation.namesJockey());
 		Text jockey = new Text(relation.namesJockey());
 		VBox bettor = new VBox();
 		HBox textB = new HBox();
@@ -108,7 +109,7 @@ public class Controller implements Initializable {
 		s.close();
 		sa = new Stage();
 		HBox root = new HBox();
-		Text jockey = new Text("podio");//relation.podio()	
+		Text jockey = new Text(relation.play());	
 		VBox b =   new VBox();
 		Text  t= new Text("Escriba su numero de identificacion para ver si gano"); 
 		tconsult = new TextField();
