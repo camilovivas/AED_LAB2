@@ -29,8 +29,13 @@ public class Hippodrome {
 	}
 	
 	public void invertQueue() {
-		//TODO
-		//@TEACHER
+		while (!jockeys.isEmpty()) {
+			jockeysRematch.push(jockeys.poll());
+		}
+		
+		while (!jockeysRematch.isEmpty()) {
+			jockeys.offer(jockeysRematch.pop());
+		}
 	}
 	
 	
