@@ -5,8 +5,10 @@ import java.util.ResourceBundle;
 import model.*;
 import javafx.fxml.Initializable;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
+import javafx.scene.control.Alert.AlertType;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
@@ -35,7 +37,7 @@ public class Controller implements Initializable {
 	private Button readyB;
 	private Button consult;
 	private Button tryAgain;
-	
+
 	public Controller(Stage s) {
 		relation = new Hippodrome();
 		this.stage = s;
@@ -57,26 +59,26 @@ public class Controller implements Initializable {
 		actionTryAgain();
 		start();
 	}
-	
+
 	public void start() {
 		VBox vb2 = new VBox(4);
-		HBox hb2 = new HBox();		
+		HBox hb2 = new HBox();
 		jockeys();
 		chargeExample();
 		hb2.getChildren().addAll(btStart, btAddMore);
-		vb2.getChildren().addAll(example,hb, hb2);
+		vb2.getChildren().addAll(example, hb, hb2);
 		Scene sc = new Scene(vb2);
 		stage.setScene(sc);
 		stage.show();
 	}
-	
+
 	public void actionbtStart() {
-		btStart.setOnAction(e->{
+		btStart.setOnAction(e -> {
 			StageBettor();
 		});
 	}
-	
-	public  void StageBettor() {
+
+	public void StageBettor() {
 		stage.close();
 		exampleB();
 		s = new Stage();
@@ -91,75 +93,82 @@ public class Controller implements Initializable {
 		B4 = new TextField();
 		HBox butt = new HBox();
 		butt.getChildren().addAll(addB, readyB);
-		textB.getChildren().addAll(B1,B2,B3,B4);
-		bettor.getChildren().addAll(example2,textB, butt);
-		root.getChildren().addAll(jockey,bettor);
+		textB.getChildren().addAll(B1, B2, B3, B4);
+		bettor.getChildren().addAll(example2, textB, butt);
+		root.getChildren().addAll(jockey, bettor);
 		Scene sc = new Scene(root);
 		s.setScene(sc);
 		s.show();
 	}
-	
+
 	public void actionPlay() {
-		readyB.setOnAction(e->{
+		readyB.setOnAction(e -> {
 			play();
 		});
 	}
-	
+
 	public void play() {
 		s.close();
 		sa = new Stage();
 		HBox root = new HBox();
-		Text jockey = new Text(relation.play());	
-		VBox b =   new VBox();
-		Text  t= new Text("Escriba su numero de identificacion para ver si gano"); 
+		Text jockey = new Text(relation.play());
+		VBox b = new VBox();
+		Text t = new Text("Escriba su numero de identificacion para ver si gano");
 		tconsult = new TextField();
 		result = new Text();
 		HBox h = new HBox();
 		h.getChildren().addAll(rematch, tryAgain);
-		b.getChildren().addAll(t,tconsult,result, consult,h);
+		b.getChildren().addAll(t, tconsult, result, consult, h);
 		root.getChildren().addAll(jockey, b);
 		Scene sc = new Scene(root);
 		sa.setScene(sc);
 		sa.show();
 	}
-	
+
 	public void actionConsult() {
-		consult.setOnAction(e->{
+		consult.setOnAction(e -> {
 			String id = tconsult.getText();
 			String tresult = relation.checkBettor(id);
 			result.setText(tresult);
 			tconsult.clear();
 		});
 	}
-	
+
 	public void actionRematch() {
-		rematch.setOnAction(e->{
+		rematch.setOnAction(e -> {
 			sa.close();
 			StageBettor();
 		});
 	}
-	
+
 	public void actionTryAgain() {
-		tryAgain.setOnAction(e->{
+		tryAgain.setOnAction(e -> {
 			sa.close();
 			start();
 		});
 	}
-	
+
 	public void actionAddBettor() {
-		addB.setOnAction(e->{
+		addB.setOnAction(e -> {
 			String cc = B1.getText();
 			String name = B2.getText();
 			int money = Integer.parseInt(B3.getText());
 			String horse = B4.getText();
+			if (relation.search(B4.getText()) == null) {
+				Alert info = new Alert(AlertType.ERROR);
+				info.setTitle("Nonexistent horse");
+				info.setContentText("The horse you want to add does not exist");
+				info.showAndWait();
+			}else {
 			relation.addBettor(cc, name, money, horse);
 			B1.clear();
 			B2.clear();
 			B3.clear();
 			B4.clear();
+			}
 		});
 	}
-	
+
 	public void exampleB() {
 		example2 = new VBox();
 		Text tc = new Text("llene las casillas  asi:");
@@ -172,23 +181,23 @@ public class Controller implements Initializable {
 		t3.setDisable(true);
 		TextField t4 = new TextField("caballo a apostar");
 		t4.setDisable(true);
-		c.getChildren().addAll(t1,t2,t3,t4);
-		example2.getChildren().addAll(tc,c);
+		c.getChildren().addAll(t1, t2, t3, t4);
+		example2.getChildren().addAll(tc, c);
 	}
-	
+
 	public void actionbtAddMore() {
-		btAddMore.setOnAction(e->{
+		btAddMore.setOnAction(e -> {
 			String nameH = t1.getText();
-			String nameJ =t2.getText();
+			String nameJ = t2.getText();
 			relation.addJockey(nameJ, nameH);
 			t1.clear();
 			t2.clear();
-			if(relation.getJockeys().size() > 6) {
+			if (relation.getJockeys().size() > 6) {
 				btStart.setDisable(false);
 			}
 		});
 	}
-	
+
 	public void chargeExample() {
 		example = new VBox();
 		HBox hb = new HBox();
@@ -197,21 +206,20 @@ public class Controller implements Initializable {
 		t1.setDisable(true);
 		TextField t2 = new TextField("Name jockey");
 		t2.setDisable(true);
-		hb.getChildren().addAll(t1,t2);
+		hb.getChildren().addAll(t1, t2);
 		example.getChildren().addAll(tc, hb);
-		
+
 	}
-	
+
 	public void jockeys() {
-			hb = new HBox();
-			t1 = new TextField();
-			t2 = new TextField();
-			hb.getChildren().addAll(t1,t2);
+		hb = new HBox();
+		t1 = new TextField();
+		t2 = new TextField();
+		hb.getChildren().addAll(t1, t2);
 	}
-	
 
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
 		// TODO Auto-generated method stub
-	}	
+	}
 }
