@@ -7,11 +7,29 @@ public class Hippodrome {
 	private IStack<Jockey> jockeysRematch;
 	private HashFuntion<Integer, Bettor> bettors;
 	private int number;
+	private Clock clock;
 
 	public Hippodrome() {
 		jockeys = new QueueGeneric<>();
 		bettors = new HashTable<>();
 		jockeysRematch = new Stack<>();
+		clock = new Clock();
+	}
+	
+	public boolean stopBets() {
+		boolean ret = false;
+		if(clock.getSeconds()>180) {
+			ret = true;
+		}
+		return ret;
+	}
+	
+	public Clock getClock() {
+		return clock;
+	}
+
+	public void setClock(Clock clock) {
+		this.clock = clock;
 	}
 
 	public QueueFuntion<Jockey> getJockeys() {
@@ -48,7 +66,7 @@ public class Hippodrome {
 		
 	}
 	
-	public String checkBettor(String id) {
+	public String checkBettor(String id) throws Exception{
 		int cast = Integer.parseInt(id);
 		String toReturn = "";
 		Bettor temp = bettors.tableRetrieve(cast);

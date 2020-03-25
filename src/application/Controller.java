@@ -32,6 +32,7 @@ public class Controller implements Initializable {
 	private TextField B4;
 	private TextField tconsult;
 	private Text result;
+	private Text segundos;
 	private Button rematch;
 	private Button addB;
 	private Button readyB;
@@ -128,8 +129,16 @@ public class Controller implements Initializable {
 	public void actionConsult() {
 		consult.setOnAction(e -> {
 			String id = tconsult.getText();
-			String tresult = relation.checkBettor(id);
-			result.setText(tresult);
+			String tresult;
+			try {
+				tresult = relation.checkBettor(id);
+				result.setText(tresult);
+			} catch (Exception e1) {
+				Alert info = new Alert(AlertType.ERROR);
+				info.setTitle("Letter input");
+				info.setContentText("Please do not enter letters, enter only numbers is an ID!");
+				info.showAndWait();
+			}
 			tconsult.clear();
 		});
 	}
@@ -217,6 +226,10 @@ public class Controller implements Initializable {
 		t1 = new TextField();
 		t2 = new TextField();
 		hb.getChildren().addAll(t1, t2);
+	}
+	
+	public void moveTime() {
+		segundos.setText(Integer.toString(relation.getClock().getSeconds()));
 	}
 
 	@Override
