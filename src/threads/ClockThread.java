@@ -20,8 +20,7 @@ public class ClockThread extends Thread {
 				h.getClock().time();
 				cc.moveTime();
 			}
-//			m.endGame();
-//			cc.setVisibility();
+			cc.finishTime();
 		} catch (InterruptedException e) {
 			e.printStackTrace();
 		} catch (Exception e) {
