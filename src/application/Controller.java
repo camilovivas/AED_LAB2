@@ -38,6 +38,7 @@ public class Controller implements Initializable {
 	private Button readyB;
 	private Button consult;
 	private Button tryAgain;
+	private Text time;
 
 	public Controller(Stage s) {
 		relation = new Hippodrome();
@@ -51,6 +52,7 @@ public class Controller implements Initializable {
 		consult = new Button("consultar");
 		tryAgain = new Button("play again");
 		rematch = new Button("Revancha");
+		time = new Text();
 		actionbtAddMore();
 		actionbtStart();
 		actionAddBettor();
@@ -93,7 +95,7 @@ public class Controller implements Initializable {
 		B3 = new TextField();
 		B4 = new TextField();
 		HBox butt = new HBox();
-		butt.getChildren().addAll(addB, readyB);
+		butt.getChildren().addAll(addB, readyB, time);
 		textB.getChildren().addAll(B1, B2, B3, B4);
 		bettor.getChildren().addAll(example2, textB, butt);
 		root.getChildren().addAll(jockey, bettor);
@@ -154,6 +156,7 @@ public class Controller implements Initializable {
 	public void actionTryAgain() {
 		tryAgain.setOnAction(e -> {
 			sa.close();
+			relation.newGame();
 			start();
 		});
 	}

@@ -52,7 +52,9 @@ public class Hippodrome {
 		}
 		
 		while (!jockeysRematch.isEmpty()) {
-			jockeys.offer(jockeysRematch.pop());
+			Jockey a = jockeysRematch.pop();
+			a.setWin(false);
+			jockeys.offer(a);
 		}
 	}
 	
@@ -84,6 +86,11 @@ public class Hippodrome {
 		}
 		jockeys = temp;
 		return names;
+	}
+	
+	public void newGame() {
+		jockeys = new QueueGeneric<>();
+		bettors = new HashTable<>();
 	}
 
 	public QueueGeneric<Jockey> outcome() {
