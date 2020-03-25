@@ -156,6 +156,7 @@ public class Controller implements Initializable {
 	public void actionTryAgain() {
 		tryAgain.setOnAction(e -> {
 			sa.close();
+			btStart.setDisable(true);
 			relation.newGame();
 			start();
 		});
