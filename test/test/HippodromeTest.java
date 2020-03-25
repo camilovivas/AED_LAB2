@@ -27,6 +27,20 @@ class HippodromeTest {
 		a.addJockey("camilo7", "pony7");
 		assertEquals(a.outcome().size(), 7);
 	}
+	@Test
+	void invertTest() {
+		Hippodrome a = new Hippodrome();
+		a.addJockey("camilo", "pony");
+		a.addJockey("camilo2", "pony2");
+		a.addJockey("camilo3", "pony3");
+		a.addJockey("camilo4", "pony4");
+		a.addJockey("camilo5", "pony5");
+		a.addJockey("camilo6", "pony6");
+		a.addJockey("camilo7", "pony7");
+		a.invertQueue();
+		String actual = a.getJockeys().peek().getNameHorse();
+		assertEquals("pony7", actual);
+	}
 	
 	@Test
 	void addBettorTest() {

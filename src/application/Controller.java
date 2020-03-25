@@ -48,7 +48,7 @@ public class Controller implements Initializable {
 		addB = new Button("Add");
 		readyB = new Button("play");
 		consult = new Button("consultar");
-		tryAgain = new Button("Jugar de nuevo");
+		tryAgain = new Button("play again");
 		rematch = new Button("Revancha");
 		actionbtAddMore();
 		actionbtStart();
@@ -137,6 +137,7 @@ public class Controller implements Initializable {
 	public void actionRematch() {
 		rematch.setOnAction(e -> {
 			sa.close();
+			relation.invertQueue();
 			StageBettor();
 		});
 	}
