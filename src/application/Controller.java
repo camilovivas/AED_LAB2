@@ -3,6 +3,7 @@ package application;
 import java.net.URL;
 import java.util.ResourceBundle;
 import model.*;
+import threads.ClockThread;
 import javafx.fxml.Initializable;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
@@ -32,13 +33,13 @@ public class Controller implements Initializable {
 	private TextField B4;
 	private TextField tconsult;
 	private Text result;
-	private Text segundos;
 	private Button rematch;
 	private Button addB;
 	private Button readyB;
 	private Button consult;
 	private Button tryAgain;
 	private Text time;
+	private ClockThread ct;
 
 	public Controller(Stage s) {
 		relation = new Hippodrome();
@@ -53,6 +54,7 @@ public class Controller implements Initializable {
 		tryAgain = new Button("play again");
 		rematch = new Button("Revancha");
 		time = new Text();
+		ct = new ClockThread(this, relation);
 		actionbtAddMore();
 		actionbtStart();
 		actionAddBettor();
@@ -99,6 +101,7 @@ public class Controller implements Initializable {
 		textB.getChildren().addAll(B1, B2, B3, B4);
 		bettor.getChildren().addAll(example2, textB, butt);
 		root.getChildren().addAll(jockey, bettor);
+		ct.start();
 		Scene sc = new Scene(root);
 		s.setScene(sc);
 		s.show();
@@ -233,7 +236,11 @@ public class Controller implements Initializable {
 	}
 	
 	public void moveTime() {
-		segundos.setText(Integer.toString(relation.getClock().getSeconds()));
+		time.setText(Integer.toString(relation.getClock().getSeconds()));
+	}
+	
+	public void finishTime() {
+		addB.setVisible(false);
 	}
 
 	@Override

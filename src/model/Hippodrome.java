@@ -18,7 +18,7 @@ public class Hippodrome {
 	
 	public boolean stopBets() {
 		boolean ret = false;
-		if(clock.getSeconds()>180) {
+		if(clock.getSeconds()>=180) {
 			ret = true;
 		}
 		return ret;
